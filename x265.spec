@@ -30,13 +30,11 @@ URL:            https://bitbucket.org/multicoreware/x265/wiki/Home
 Source0:        https://bitbucket.org/multicoreware/x265/downloads/%{name}_%{version}.tar.gz
 Patch1:         x265.pkgconfig.patch
 Patch2:         x265-fix_enable512.patch
-BuildRequires:  cmake >= 2.8.8
-BuildRequires:  gcc-c++
-BuildRequires:  nasm >= 2.13
-BuildRequires:  pkgconfig
-%ifarch x86_64
-BuildRequires:  libnuma-devel >= 2.0.9
-%endif
+BuildRequires:  cmake
+BuildRequires:  gcc
+BuildRequires:  nasm
+BuildRequires:  pkg-config
+BuildRequires:  numactl-dev
 
 %description
 x265 is a free library for encoding next-generation H265/HEVC video
@@ -69,21 +67,16 @@ streams.
 
 sed -i -e "s/0.0/%{soname}.0/g" source/cmake/version.cmake
 
-
 %build
 SOURCE_DIR="$PWD"/source
 COMMON_FLAGS="-DENABLE_TESTS=OFF -DENABLE_PIC=ON"
 HIGH_BIT_DEPTH_FLAGS="-DENABLE_CLI=OFF -DENABLE_SHARED=OFF -DEXPORT_C_API=OFF -DHIGH_BIT_DEPTH=ON"
 
-%if 0%{?suse_version} >= 1500
 %define __sourcedir ./source
 
 # Build 10bit depth version of the library
 %define __builddir ./source/build-10bit
 %cmake $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS \
-%ifarch i586
-      -DENABLE_ASSEMBLY=OFF
-%endif
 
 make %{?_smp_mflags}
 cd ../..
@@ -91,9 +84,7 @@ cd ../..
 # Build 12bit depth version of the library
 %define __builddir ./source/build-12bit
 %cmake $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS -DMAIN12=ON \
-%ifarch i586
-      -DENABLE_ASSEMBLY=OFF
-%endif
+
 
 make %{?_smp_mflags}
 cd ../..
@@ -119,9 +110,6 @@ make %{?_smp_mflags}
 cd ../../
 
 %install
-%if 0%{?suse_version} < 1500
-cd source
-%endif
 %cmake_install
 rm -f %{buildroot}%{_libdir}/%{libname}.a
 echo "%{libname}-%{soname}" > %{_sourcedir}/baselibs.conf
