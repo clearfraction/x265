@@ -104,7 +104,6 @@ mv source/build-12bit/libx265.a source/build-12bit/libx265_main12.a
 
 cd source
 %cmake $COMMON_FLAGS
-%endif
 make %{?_smp_mflags}
 cd ../../
 
