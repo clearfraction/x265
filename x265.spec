@@ -102,11 +102,6 @@ mv source/build-12bit/libx265.a source/build-12bit/libx265_main12.a
        -DEXTRA_LINK_FLAGS="-L$SOURCE_DIR/build-10bit -L$SOURCE_DIR/build-12bit" \
        -DEXTRA_LIB="x265_main10.a;x265_main12.a"
 
-cd source
-%cmake $COMMON_FLAGS
-make %{?_smp_mflags}
-cd ../../
-
 %install
 %cmake_install
 rm -f %{buildroot}%{_libdir}/%{libname}.a
