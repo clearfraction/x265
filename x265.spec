@@ -72,19 +72,19 @@ SOURCE_DIR="$PWD"/source
 COMMON_FLAGS="-DENABLE_TESTS=OFF -DENABLE_PIC=ON"
 HIGH_BIT_DEPTH_FLAGS="-DENABLE_CLI=OFF -DENABLE_SHARED=OFF -DEXPORT_C_API=OFF -DHIGH_BIT_DEPTH=ON"
 
-%define __sourcedir ./source
 
 # Build 10bit depth version of the library
-%define __builddir ./source/build-10bit
+pushd ./source/build-10bit
 %cmake $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS \
+popd
 
 make %{?_smp_mflags}
 cd ../..
 
 # Build 12bit depth version of the library
-%define __builddir ./source/build-12bit
+pushd ./source/build-12bit
 %cmake $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS -DMAIN12=ON \
-
+popd
 
 make %{?_smp_mflags}
 cd ../..
@@ -93,7 +93,7 @@ mv source/build-10bit/libx265.a source/build-10bit/libx265_main10.a
 mv source/build-12bit/libx265.a source/build-12bit/libx265_main12.a
 
 # Build general version of the library linking in the 10/12bit depth versions
-%define __builddir ./source/build
+pushd ./source/build
 %cmake -DENABLE_TESTS=OFF \
        -DENABLE_PIC=ON \
        -DENABLE_CLI=ON \
@@ -101,6 +101,7 @@ mv source/build-12bit/libx265.a source/build-12bit/libx265_main12.a
        -DLINKED_12BIT=ON \
        -DEXTRA_LINK_FLAGS="-L$SOURCE_DIR/build-10bit -L$SOURCE_DIR/build-12bit" \
        -DEXTRA_LIB="x265_main10.a;x265_main12.a"
+popd
 
 %install
 %cmake_install
