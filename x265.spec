@@ -74,22 +74,24 @@ HIGH_BIT_DEPTH_FLAGS="-DENABLE_CLI=OFF -DENABLE_SHARED=OFF -DEXPORT_C_API=OFF -D
 
 
 # Build 10bit depth version of the library
-mkdir -p build-10bit
-cd build-10bit
-%cmake ../source $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS
+mkdir -p source/build-10bit
+cd source/build-10bit
+%cmake ../../source $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS
 make %{?_smp_mflags}
-cd ..
+cd ../..
 
 
 # Build 12bit depth version of the library
-mkdir -p build-12bit
-cd build-12bit
-%cmake ../source $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS -DMAIN12=ON \
+mkdir -p source/build-12bit
+cd source/build-12bit
+%cmake ../../source $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS -DMAIN12=ON \
 make %{?_smp_mflags}
-cd ..
+cd ../..
 
-mv build-10bit/libx265.a source/build-10bit/libx265_main10.a
-mv build-12bit/libx265.a source/build-12bit/libx265_main12.a
+mv source/build-10bit/libx265.a source/build-10bit/libx265_main10.a
+mv source/build-12bit/libx265.a source/build-12bit/libx265_main12.a
+
+
 
 
 # Build general version of the library linking in the 10/12bit depth versions
