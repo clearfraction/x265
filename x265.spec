@@ -97,7 +97,7 @@ mv source/build-12bit/libx265.a source/build-12bit/libx265_main12.a
 # Build general version of the library linking in the 10/12bit depth versions
 mkdir /source/build
 pushd ./source/build
-%cmake -DENABLE_TESTS=OFF \
+%cmake ../../source -DENABLE_TESTS=OFF \
        -DENABLE_PIC=ON \
        -DENABLE_CLI=ON \
        -DLINKED_10BIT=ON \
