@@ -84,7 +84,7 @@ cd ../..
 # Build 12bit depth version of the library
 mkdir -p source/build-12bit
 cd source/build-12bit
-%cmake ../../source $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS -DMAIN12=ON \
+%cmake ../../source $COMMON_FLAGS $HIGH_BIT_DEPTH_FLAGS -DMAIN12=ON
 make %{?_smp_mflags}
 cd ../..
 
