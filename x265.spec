@@ -46,7 +46,6 @@ Requires: %{name}-libs%{?_isa} = %{version}-%{release}
 The primary objective of x265 is to become the best H.265/HEVC encoder
 available anywhere, offering the highest compression efficiency and the
 highest performance on a wide variety of hardware platforms.
-
 This package contains the shared library development files.
 
 %prep
