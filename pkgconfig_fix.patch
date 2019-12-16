@@ -1,5 +1,5 @@
---- a/source/x265.pc.in
-+++ b/source/x265.pc.in
+--- a/source/x265.pc.in	2018-02-21 02:55:56.000000000 -0600
++++ b/source/x265.pc-1.in	2018-04-15 10:41:20.215641466 -0600
 @@ -1,6 +1,6 @@
  prefix=@CMAKE_INSTALL_PREFIX@
  exec_prefix=${prefix}
