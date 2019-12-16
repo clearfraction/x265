@@ -2,7 +2,7 @@
 %global commit0 b5c86a64bbbede216b25092def72272ecde5523a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:12})  
 %global gver .git%{shortcommit0}
-
+%abi_package %{nil}
 
 Summary: 	H.265/HEVC encoder
 Name: 		x265
