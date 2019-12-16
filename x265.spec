@@ -99,7 +99,6 @@ popd
 pushd build-8
 make DESTDIR=%{buildroot} install
 rm %{buildroot}%{_libdir}/libx265.a
-install -Dpm644 %{_builddir}/multicoreware-%{name}-%{shortcommit0}/COPYING %{buildroot}%{_pkgdocdir}/COPYING
 
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
@@ -108,8 +107,6 @@ install -Dpm644 %{_builddir}/multicoreware-%{name}-%{shortcommit0}/COPYING %{bui
 %{_bindir}/x265
 
 %files libs
-%dir %{_pkgdocdir}
-%{_pkgdocdir}/COPYING
 %{_libdir}/libx265.so.*
 
 %files dev
