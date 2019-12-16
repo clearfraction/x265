@@ -9,7 +9,7 @@ Name: 		x265
 Group:		Applications/Multimedia
 Version: 	3.2.1
 Release: 	7%{?dist}
-URL: 		  http://x265.org/
+URL: 		http://x265.org/
 Source0:	https://bitbucket.org/multicoreware/x265/get/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch:		pkgconfig_fix.patch
 License: 	GPLv2+ and BSD
