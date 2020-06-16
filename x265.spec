@@ -1,5 +1,5 @@
-%global gitdate 20191201
-%global commit0 b5c86a64bbbede216b25092def72272ecde5523a
+%global gitdate 20200217
+%global commit0 7b120308dc64616cb5ef8de3bc3ee617f00803d9
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:12})  
 %global gver .git%{shortcommit0}
 %global abi_package %{nil}
@@ -7,7 +7,7 @@
 Summary: 	H.265/HEVC encoder
 Name: 		x265
 Group:		Applications/Multimedia
-Version: 	3.2.1
+Version: 	3.4
 Release: 	8%{?dist}
 URL: 		http://x265.org/
 Source0:	https://bitbucket.org/multicoreware/x265/get/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
