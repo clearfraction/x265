@@ -1,21 +1,23 @@
 %global gitdate 20200217
-%global commit0 7b120308dc64616cb5ef8de3bc3ee617f00803d9
+%global commit0 07295ba7ab551bb9c1580fdaee3200f1b45711b7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:12})  
 %global gver .git%{shortcommit0}
 %global abi_package %{nil}
+%global debug_package %{nil}
 
 Summary: 	H.265/HEVC encoder
 Name: 		x265
 Group:		Applications/Multimedia
 Version: 	3.4
-Release: 	8%{?dist}
+Release: 	9%{?dist}
 URL: 		http://x265.org/
-Source0:	https://bitbucket.org/multicoreware/x265/get/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:	https://github.com/videolan/x265/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch:		pkgconfig_fix.patch
 License: 	GPLv2+ and BSD
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  nasm
+BuildRequires:	yasm
 BuildRequires:  pkg-config
 BuildRequires:  numactl-dev
 
@@ -56,9 +58,6 @@ mkdir -p build-8 build-10 build-12
 
 
 %build
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
