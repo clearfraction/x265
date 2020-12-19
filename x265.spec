@@ -51,7 +51,7 @@ highest performance on a wide variety of hardware platforms.
 This package contains the shared library development files.
 
 %prep
-%setup -n multicoreware-%{name}-%{shortcommit0}
+%setup -n %{name}-%{commit0}
 %patch -p1
 sed -i 's|set(LIB_INSTALL_DIR lib CACHE STRING "Install location of libraries")|set(LIB_INSTALL_DIR lib64 CACHE STRING "Install location of libraries")|g' source/CMakeLists.txt
 mkdir -p build-8 build-10 build-12
