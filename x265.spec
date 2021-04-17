@@ -8,16 +8,17 @@
 Summary: 	H.265/HEVC encoder
 Name: 		x265
 Group:		Applications/Multimedia
-Version: 	3.4
-Release: 	9%{?dist}
+Version: 	        3.5
+Release: 	        1
 URL: 		http://x265.org/
-Source0:	https://github.com/videolan/x265/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+#Source0:	https://github.com/videolan/x265/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:         https://bitbucket.org/multicoreware/%{name}_git/downloads/%{name}_%{version}.tar.gz
 Patch:		pkgconfig_fix.patch
-License: 	GPLv2+ and BSD
+License: 	        GPLv2+ and BSD
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  nasm
-BuildRequires:	yasm
+BuildRequires:  yasm
 BuildRequires:  pkg-config
 BuildRequires:  numactl-dev
 
@@ -51,7 +52,7 @@ highest performance on a wide variety of hardware platforms.
 This package contains the shared library development files.
 
 %prep
-%setup -n %{name}-%{commit0}
+%setup -n %{name}_%{version}
 %patch -p1
 sed -i 's|set(LIB_INSTALL_DIR lib CACHE STRING "Install location of libraries")|set(LIB_INSTALL_DIR lib64 CACHE STRING "Install location of libraries")|g' source/CMakeLists.txt
 mkdir -p build-8 build-10 build-12
@@ -63,10 +64,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 
 pushd build-12
     %cmake ../source \
