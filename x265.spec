@@ -8,13 +8,13 @@
 Summary: 	H.265/HEVC encoder
 Name: 		x265
 Group:		Applications/Multimedia
-Version: 	        3.5
-Release: 	        1
+Version:    3.5
+Release:    2
 URL: 		http://x265.org/
 #Source0:	https://github.com/videolan/x265/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source0:         https://bitbucket.org/multicoreware/%{name}_git/downloads/%{name}_%{version}.tar.gz
+Source0:    https://bitbucket.org/multicoreware/%{name}_git/downloads/%{name}_%{version}.tar.gz
 Patch:		pkgconfig_fix.patch
-License: 	        GPLv2+ and BSD
+License:        GPLv2+ and BSD
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  nasm
