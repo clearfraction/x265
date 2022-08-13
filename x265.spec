@@ -27,8 +27,6 @@ The primary objective of x265 is to become the best H.265/HEVC encoder
 available anywhere, offering the highest compression efficiency and the
 highest performance on a wide variety of hardware platforms.
 
-This package contains the command line encoder.
-
 %package libs
 Summary: H.265/HEVC encoder library
 Group: Development/Libraries
@@ -37,8 +35,6 @@ Group: Development/Libraries
 The primary objective of x265 is to become the best H.265/HEVC encoder
 available anywhere, offering the highest compression efficiency and the
 highest performance on a wide variety of hardware platforms.
-
-This package contains the shared library.
 
 %package dev
 Summary: H.265/HEVC encoder library development files
@@ -77,7 +73,7 @@ pushd build-12
       -DEXPORT_C_API='FALSE' \
       -DENABLE_CLI='FALSE' \
       -DENABLE_SHARED='FALSE'
-    make
+    make %{?_smp_mflags}
 popd
 
     pushd build-10
@@ -87,7 +83,7 @@ popd
       -DEXPORT_C_API='FALSE' \
       -DENABLE_CLI='FALSE' \
       -DENABLE_SHARED='FALSE'
-    make
+    make %{?_smp_mflags}
 popd
 
     pushd build-8
@@ -101,7 +97,7 @@ popd
       -DEXTRA_LINK_FLAGS='-L.' \
       -DLINKED_10BIT='TRUE' \
       -DLINKED_12BIT='TRUE'
-    make
+    make %{?_smp_mflags}
 popd
 
 
