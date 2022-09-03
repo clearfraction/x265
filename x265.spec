@@ -1,20 +1,17 @@
-%global gitdate 20200217
-%global commit0 07295ba7ab551bb9c1580fdaee3200f1b45711b7
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:12})  
-%global gver .git%{shortcommit0}
-%global abi_package %{nil}
-%global debug_package %{nil}
+%global gitdate 20220706
+%global commit 20255e6f0ead5b2ef65a520f202cedd5965f8541
+%global shortcommit %(c=%{commit}; echo ${c:0:12})  
+%global gver .git%{shortcommit}
 
-Summary: 	H.265/HEVC encoder
-Name: 		x265
-Group:		Applications/Multimedia
+Summary:    H.265/HEVC encoder
+Name:       x265
+Group:      Applications/Multimedia
 Version:    3.5
-Release:    2
-URL: 		http://x265.org/
-#Source0:	https://github.com/videolan/x265/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source0:    https://bitbucket.org/multicoreware/%{name}_git/downloads/%{name}_%{version}.tar.gz
-Patch:		pkgconfig_fix.patch
-License:        GPLv2+ and BSD
+Release:    %{commit}
+URL:        http://x265.org/
+Source0:    https://bitbucket.org/multicoreware/x265_git/get/%{commit}.tar.gz#/%{name}-%{shortcommit}.tar.gz
+Patch:      pkgconfig_fix.patch
+License:    GPLv2+ and BSD
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  nasm
@@ -39,7 +36,7 @@ highest performance on a wide variety of hardware platforms.
 %package dev
 Summary: H.265/HEVC encoder library development files
 Group: Development/Libraries
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}-libs = %{version}-%{release}
 
 %description dev
 The primary objective of x265 is to become the best H.265/HEVC encoder
@@ -48,7 +45,7 @@ highest performance on a wide variety of hardware platforms.
 This package contains the shared library development files.
 
 %prep
-%setup -n %{name}_%{version}
+%setup -n multicoreware-x265_git-%{shortcommit}
 %patch -p1
 sed -i 's|set(LIB_INSTALL_DIR lib CACHE STRING "Install location of libraries")|set(LIB_INSTALL_DIR lib64 CACHE STRING "Install location of libraries")|g' source/CMakeLists.txt
 mkdir -p build-8 build-10 build-12
