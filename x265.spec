@@ -1,5 +1,5 @@
-%global gitdate 20221201
-%global commit 4da1198a94028026ce96ba1781d3c7842e74e173
+%global gitdate 20230401
+%global commit 753305affb093ae15d5e4b333125267b16258c21
 %global shortcommit %(c=%{commit}; echo ${c:0:12})  
 %global gver .git%{shortcommit}
 
@@ -69,6 +69,7 @@ pushd build-12
       -DMAIN12='TRUE' \
       -DEXPORT_C_API='FALSE' \
       -DENABLE_CLI='FALSE' \
+      -DENABLE_HDR10_PLUS=YES \
       -DENABLE_SHARED='FALSE'
     make %{?_smp_mflags}
 popd
@@ -79,6 +80,7 @@ popd
       -DHIGH_BIT_DEPTH='TRUE' \
       -DEXPORT_C_API='FALSE' \
       -DENABLE_CLI='FALSE' \
+      -DENABLE_HDR10_PLUS=YES \
       -DENABLE_SHARED='FALSE'
     make %{?_smp_mflags}
 popd
@@ -92,6 +94,7 @@ popd
       -DENABLE_SHARED='TRUE' \
       -DEXTRA_LIB='x265_main10.a;x265_main12.a' \
       -DEXTRA_LINK_FLAGS='-L.' \
+      -DENABLE_HDR10_PLUS=YES \
       -DLINKED_10BIT='TRUE' \
       -DLINKED_12BIT='TRUE'
     make %{?_smp_mflags}
@@ -108,17 +111,21 @@ rm %{buildroot}%{_libdir}/libx265.a
 %postun libs -p /usr/bin/ldconfig
 
 %files
-%{_bindir}/x265
+/usr/bin/x265
 
 %files libs
-%{_libdir}/libx265.so.*
+/usr/lib64/libx265.so
+/usr/lib64/libx265.so.*
+/usr/lib64/libhdr10plus.so
 
 %files dev
 %doc doc/*
-%{_includedir}/x265.h
-%{_includedir}/x265_config.h
-%{_libdir}/libx265.so
-%{_libdir}/pkgconfig/x265.pc
+/usr/include/x265.h
+/usr/include/x265_config.h
+/usr/include/hdr10plus.h
+/usr/lib64/libhdr10plus.a
+/usr/lib64/pkgconfig/x265.pc
+
 
 %changelog
 # based on https://github.com/UnitedRPMs/x265
