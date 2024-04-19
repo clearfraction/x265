@@ -1,13 +1,13 @@
-%global gitdate 20240315
-%global commit 3cf6c1e53037eb9e198860365712e1bafb22f7c6
+%global gitdate 20240404
+%global commit 6612208ba5d1994cd4698024440c42d2c5b32170
 %global shortcommit %(c=%{commit}; echo ${c:0:12})  
 %global gver .git%{shortcommit}
 
 Summary:    H.265/HEVC encoder
 Name:       x265
 Group:      Applications/Multimedia
-Version:    3.5
-Release:    %{commit}
+Version:    %{commit}
+Release:    %{gitdate}
 URL:        http://x265.org/
 Source0:    https://bitbucket.org/multicoreware/x265_git/get/%{commit}.tar.gz#/%{name}-%{shortcommit}.tar.gz
 Patch:      pkgconfig_fix.patch
